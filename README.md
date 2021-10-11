@@ -1,5 +1,29 @@
+# qucikstart
+
+# was ist jhipster
+
 # SETTINGS
 ![altimage](./images/settings.png)
+
+# Entitäten generieren
+2 Möglichkeiten, Kommandozeile, jdl studio
+user entity
+
+# Frontend bearbeiten
+entities bilder als kacheln anzeigen
+upvotes ermögliche
+
+
+# Backend bearbeitne
+evlt irgendwas ausdenken
+
+# mehrsprachigkeiten
+
+# continious integration
+
+# deployment
+
+# fazit
 
 
 # AUTO GENERATED DOCUMENTATION
