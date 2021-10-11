@@ -29,6 +29,14 @@
             <font-awesome-icon icon="th-list" />
             <span class="no-bold">Entities</span>
           </span>
+          <b-dropdown-item to="/clips">
+            <font-awesome-icon icon="asterisk" />
+            <span>Clips</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/clip-user">
+            <font-awesome-icon icon="asterisk" />
+            <span>Clip User</span>
+          </b-dropdown-item>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </b-nav-item-dropdown>
         <b-nav-item-dropdown

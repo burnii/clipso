@@ -41,6 +41,8 @@
     "jwtSecretKey": "YTBjNWI1NjBkZTkwNGM0MTc5NjEzN2ZhOTZmNWIxM2I3NDc4OGI0ODRjOTQzNTg3M2UyYTdkMzAxNGE0MGZhZDRhODk5YjQxNjJiMDA4MDk2YWY2NzQ0NmRjMDA0YTJkNDc2NjkwZjRlNjFjZGI2MmY3MjJhNjI4N2NmMTU2MjA=",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["Clips", "ClipUser"],
+    "lastLiquibaseTimestamp": 1633978067000
   }
 }

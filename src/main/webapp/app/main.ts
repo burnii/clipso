@@ -26,6 +26,8 @@ import '../content/scss/vendor.scss';
 import UserOAuth2Service from '@/entities/user/user.oauth2.service';
 /* tslint:disable */
 
+import ClipsService from '@/entities/clips/clips.service';
+import ClipUserService from '@/entities/clip-user/clip-user.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -81,6 +83,8 @@ new Vue({
     metricsService: () => new MetricsService(),
 
     userOAuth2Service: () => new UserOAuth2Service(),
+    clipsService: () => new ClipsService(),
+    clipUserService: () => new ClipUserService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },
