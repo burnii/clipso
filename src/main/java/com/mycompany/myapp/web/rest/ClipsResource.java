@@ -124,9 +124,6 @@ public class ClipsResource {
             .findById(clips.getId())
             .map(
                 existingClips -> {
-                    if (clips.getUserId() != null) {
-                        existingClips.setUserId(clips.getUserId());
-                    }
                     if (clips.getName() != null) {
                         existingClips.setName(clips.getName());
                     }

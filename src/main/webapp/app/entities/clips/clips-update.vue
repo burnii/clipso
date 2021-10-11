@@ -9,23 +9,6 @@
             <input type="text" class="form-control" id="id" name="id" v-model="clips.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" for="clips-userId">User Id</label>
-            <input
-              type="number"
-              class="form-control"
-              name="userId"
-              id="clips-userId"
-              data-cy="userId"
-              :class="{ valid: !$v.clips.userId.$invalid, invalid: $v.clips.userId.$invalid }"
-              v-model.number="$v.clips.userId.$model"
-              required
-            />
-            <div v-if="$v.clips.userId.$anyDirty && $v.clips.userId.$invalid">
-              <small class="form-text text-danger" v-if="!$v.clips.userId.required"> This field is required. </small>
-              <small class="form-text text-danger" v-if="!$v.clips.userId.numeric"> This field should be a number. </small>
-            </div>
-          </div>
-          <div class="form-group">
             <label class="form-control-label" for="clips-name">Name</label>
             <input
               type="text"

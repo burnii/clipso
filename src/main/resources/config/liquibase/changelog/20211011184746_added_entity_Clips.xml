@@ -14,9 +14,6 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_id" type="integer">
-                <constraints nullable="false" />
-            </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -52,7 +49,6 @@
                   separator=";"
                   tableName="clips">
             <column name="id" type="numeric"/>
-            <column name="user_id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="content" type="blob"/>
             <column name="content_content_type" type="string"/>

@@ -8,8 +8,6 @@ import ClipsUpdateComponent from '@/entities/clips/clips-update.vue';
 import ClipsClass from '@/entities/clips/clips-update.component';
 import ClipsService from '@/entities/clips/clips.service';
 
-import ClipUserService from '@/entities/clip-user/clip-user.service';
-
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -37,8 +35,6 @@ describe('Component Tests', () => {
         router,
         provide: {
           clipsService: () => clipsServiceStub,
-
-          clipUserService: () => new ClipUserService(),
         },
       });
       comp = wrapper.vm;

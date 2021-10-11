@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -22,7 +21,6 @@ public class ClipUser implements Serializable {
     private User internalUser;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "clipUsers" }, allowSetters = true)
     private Clips clips;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

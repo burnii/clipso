@@ -5,12 +5,6 @@
         <h2 class="jh-entity-heading" data-cy="clipsDetailsHeading"><span>Clips</span> {{ clips.id }}</h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span>User Id</span>
-          </dt>
-          <dd>
-            <span>{{ clips.userId }}</span>
-          </dd>
-          <dt>
             <span>Name</span>
           </dt>
           <dd>

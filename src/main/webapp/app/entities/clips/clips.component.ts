@@ -2,7 +2,7 @@ import { mixins } from 'vue-class-component';
 
 import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
-import { IClips } from '@/shared/model/clips.model';
+import { IClips, Clips as Clip } from '@/shared/model/clips.model';
 
 import JhiDataUtils from '@/shared/data/data-utils.service';
 
@@ -25,6 +25,47 @@ export default class Clips extends mixins(JhiDataUtils) {
 
   public clear(): void {
     this.retrieveAllClipss();
+  }
+
+  public takeScreenshot(): void {
+    const takeScreenshot2 = async () => {
+      const stream = await navigator.mediaDevices.getDisplayMedia();
+
+      const track = stream.getVideoTracks()[0];
+
+      const image = new ImageCapture(track);
+
+      const bitmap = await image.grabFrame();
+
+      track.stop();
+
+      const canvas = <HTMLCanvasElement>document.createElement('CANVAS');
+      const ctx = canvas.getContext('2d');
+      canvas.height = bitmap.height;
+      canvas.width = bitmap.width;
+      ctx.drawImage(bitmap, 0, 0);
+      const dataURL = canvas.toDataURL();
+      const base64string = dataURL.split(',')[1];
+      console.log(dataURL);
+      console.log(base64string);
+      const clip: IClips = new Clip();
+      clip.name = 'test';
+      clip.negativeCount = 12;
+      clip.positiveCount = 13;
+      clip.content = base64string;
+      clip.contentContentType = 'image/png';
+
+      new ClipsService()
+        .create(clip)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+
+    takeScreenshot2();
   }
 
   public retrieveAllClipss(): void {

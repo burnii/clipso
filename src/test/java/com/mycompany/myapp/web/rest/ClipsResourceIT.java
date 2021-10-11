@@ -30,9 +30,6 @@ import org.springframework.util.Base64Utils;
 @WithMockUser
 class ClipsResourceIT {
 
-    private static final Integer DEFAULT_USER_ID = 1;
-    private static final Integer UPDATED_USER_ID = 2;
-
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -72,7 +69,6 @@ class ClipsResourceIT {
      */
     public static Clips createEntity(EntityManager em) {
         Clips clips = new Clips()
-            .userId(DEFAULT_USER_ID)
             .name(DEFAULT_NAME)
             .content(DEFAULT_CONTENT)
             .contentContentType(DEFAULT_CONTENT_CONTENT_TYPE)
@@ -89,7 +85,6 @@ class ClipsResourceIT {
      */
     public static Clips createUpdatedEntity(EntityManager em) {
         Clips clips = new Clips()
-            .userId(UPDATED_USER_ID)
             .name(UPDATED_NAME)
             .content(UPDATED_CONTENT)
             .contentContentType(UPDATED_CONTENT_CONTENT_TYPE)
@@ -116,7 +111,6 @@ class ClipsResourceIT {
         List<Clips> clipsList = clipsRepository.findAll();
         assertThat(clipsList).hasSize(databaseSizeBeforeCreate + 1);
         Clips testClips = clipsList.get(clipsList.size() - 1);
-        assertThat(testClips.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testClips.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testClips.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testClips.getContentContentType()).isEqualTo(DEFAULT_CONTENT_CONTENT_TYPE);
@@ -140,23 +134,6 @@ class ClipsResourceIT {
         // Validate the Clips in the database
         List<Clips> clipsList = clipsRepository.findAll();
         assertThat(clipsList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    void checkUserIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = clipsRepository.findAll().size();
-        // set the field null
-        clips.setUserId(null);
-
-        // Create the Clips, which fails.
-
-        restClipsMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clips)))
-            .andExpect(status().isBadRequest());
-
-        List<Clips> clipsList = clipsRepository.findAll();
-        assertThat(clipsList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -188,7 +165,6 @@ class ClipsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(clips.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].contentContentType").value(hasItem(DEFAULT_CONTENT_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))))
@@ -208,7 +184,6 @@ class ClipsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(clips.getId().intValue()))
-            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.contentContentType").value(DEFAULT_CONTENT_CONTENT_TYPE))
             .andExpect(jsonPath("$.content").value(Base64Utils.encodeToString(DEFAULT_CONTENT)))
@@ -236,7 +211,6 @@ class ClipsResourceIT {
         // Disconnect from session so that the updates on updatedClips are not directly saved in db
         em.detach(updatedClips);
         updatedClips
-            .userId(UPDATED_USER_ID)
             .name(UPDATED_NAME)
             .content(UPDATED_CONTENT)
             .contentContentType(UPDATED_CONTENT_CONTENT_TYPE)
@@ -255,7 +229,6 @@ class ClipsResourceIT {
         List<Clips> clipsList = clipsRepository.findAll();
         assertThat(clipsList).hasSize(databaseSizeBeforeUpdate);
         Clips testClips = clipsList.get(clipsList.size() - 1);
-        assertThat(testClips.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testClips.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testClips.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testClips.getContentContentType()).isEqualTo(UPDATED_CONTENT_CONTENT_TYPE);
@@ -331,7 +304,7 @@ class ClipsResourceIT {
         Clips partialUpdatedClips = new Clips();
         partialUpdatedClips.setId(clips.getId());
 
-        partialUpdatedClips.userId(UPDATED_USER_ID).content(UPDATED_CONTENT).contentContentType(UPDATED_CONTENT_CONTENT_TYPE);
+        partialUpdatedClips.name(UPDATED_NAME).positiveCount(UPDATED_POSITIVE_COUNT);
 
         restClipsMockMvc
             .perform(
@@ -345,11 +318,10 @@ class ClipsResourceIT {
         List<Clips> clipsList = clipsRepository.findAll();
         assertThat(clipsList).hasSize(databaseSizeBeforeUpdate);
         Clips testClips = clipsList.get(clipsList.size() - 1);
-        assertThat(testClips.getUserId()).isEqualTo(UPDATED_USER_ID);
-        assertThat(testClips.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testClips.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testClips.getContentContentType()).isEqualTo(UPDATED_CONTENT_CONTENT_TYPE);
-        assertThat(testClips.getPositiveCount()).isEqualTo(DEFAULT_POSITIVE_COUNT);
+        assertThat(testClips.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testClips.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testClips.getContentContentType()).isEqualTo(DEFAULT_CONTENT_CONTENT_TYPE);
+        assertThat(testClips.getPositiveCount()).isEqualTo(UPDATED_POSITIVE_COUNT);
         assertThat(testClips.getNegativeCount()).isEqualTo(DEFAULT_NEGATIVE_COUNT);
     }
 
@@ -366,7 +338,6 @@ class ClipsResourceIT {
         partialUpdatedClips.setId(clips.getId());
 
         partialUpdatedClips
-            .userId(UPDATED_USER_ID)
             .name(UPDATED_NAME)
             .content(UPDATED_CONTENT)
             .contentContentType(UPDATED_CONTENT_CONTENT_TYPE)
@@ -385,7 +356,6 @@ class ClipsResourceIT {
         List<Clips> clipsList = clipsRepository.findAll();
         assertThat(clipsList).hasSize(databaseSizeBeforeUpdate);
         Clips testClips = clipsList.get(clipsList.size() - 1);
-        assertThat(testClips.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testClips.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testClips.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testClips.getContentContentType()).isEqualTo(UPDATED_CONTENT_CONTENT_TYPE);

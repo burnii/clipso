@@ -3,6 +3,9 @@
     <h2 id="page-heading" data-cy="ClipsHeading">
       <span id="clips-heading">Clips</span>
       <div class="d-flex justify-content-end">
+        <button class="btn btn-info mr-2" v-on:click="takeScreenshot" :disabled="isFetching">
+          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon> <span>Take Screenshot</span>
+        </button>
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon> <span>Refresh List</span>
         </button>
@@ -28,7 +31,6 @@
         <thead>
           <tr>
             <th scope="row"><span>ID</span></th>
-            <th scope="row"><span>User Id</span></th>
             <th scope="row"><span>Name</span></th>
             <th scope="row"><span>Content</span></th>
             <th scope="row"><span>Positive Count</span></th>
@@ -41,7 +43,6 @@
             <td>
               <router-link :to="{ name: 'ClipsView', params: { clipsId: clips.id } }">{{ clips.id }}</router-link>
             </td>
-            <td>{{ clips.userId }}</td>
             <td>{{ clips.name }}</td>
             <td>
               <a v-if="clips.content" v-on:click="openFile(clips.contentContentType, clips.content)">

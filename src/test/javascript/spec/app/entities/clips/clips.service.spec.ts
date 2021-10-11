@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new ClipsService();
-      elemDefault = new Clips(0, 0, 'AAAAAAA', 'image/png', 'AAAAAAA', 0, 0);
+      elemDefault = new Clips(0, 'AAAAAAA', 'image/png', 'AAAAAAA', 0, 0);
     });
 
     describe('Service methods', () => {
@@ -81,7 +81,6 @@ describe('Service Tests', () => {
       it('should update a Clips', async () => {
         const returnedFromService = Object.assign(
           {
-            userId: 1,
             name: 'BBBBBB',
             content: 'BBBBBB',
             positiveCount: 1,
@@ -112,8 +111,8 @@ describe('Service Tests', () => {
       it('should partial update a Clips', async () => {
         const patchObject = Object.assign(
           {
-            userId: 1,
-            content: 'BBBBBB',
+            name: 'BBBBBB',
+            positiveCount: 1,
           },
           new Clips()
         );
@@ -141,7 +140,6 @@ describe('Service Tests', () => {
       it('should return a list of Clips', async () => {
         const returnedFromService = Object.assign(
           {
-            userId: 1,
             name: 'BBBBBB',
             content: 'BBBBBB',
             positiveCount: 1,

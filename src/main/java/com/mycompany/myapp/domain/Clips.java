@@ -1,9 +1,6 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -19,10 +16,6 @@ public class Clips implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -41,10 +34,6 @@ public class Clips implements Serializable {
     @Column(name = "negative_count")
     private Integer negativeCount;
 
-    @OneToMany(mappedBy = "clips")
-    @JsonIgnoreProperties(value = { "internalUser", "clips" }, allowSetters = true)
-    private Set<ClipUser> clipUsers = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -57,19 +46,6 @@ public class Clips implements Serializable {
     public Clips id(Long id) {
         this.id = id;
         return this;
-    }
-
-    public Integer getUserId() {
-        return this.userId;
-    }
-
-    public Clips userId(Integer userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -137,37 +113,6 @@ public class Clips implements Serializable {
         this.negativeCount = negativeCount;
     }
 
-    public Set<ClipUser> getClipUsers() {
-        return this.clipUsers;
-    }
-
-    public Clips clipUsers(Set<ClipUser> clipUsers) {
-        this.setClipUsers(clipUsers);
-        return this;
-    }
-
-    public Clips addClipUser(ClipUser clipUser) {
-        this.clipUsers.add(clipUser);
-        clipUser.setClips(this);
-        return this;
-    }
-
-    public Clips removeClipUser(ClipUser clipUser) {
-        this.clipUsers.remove(clipUser);
-        clipUser.setClips(null);
-        return this;
-    }
-
-    public void setClipUsers(Set<ClipUser> clipUsers) {
-        if (this.clipUsers != null) {
-            this.clipUsers.forEach(i -> i.setClips(null));
-        }
-        if (clipUsers != null) {
-            clipUsers.forEach(i -> i.setClips(this));
-        }
-        this.clipUsers = clipUsers;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -192,7 +137,6 @@ public class Clips implements Serializable {
     public String toString() {
         return "Clips{" +
             "id=" + getId() +
-            ", userId=" + getUserId() +
             ", name='" + getName() + "'" +
             ", content='" + getContent() + "'" +
             ", contentContentType='" + getContentContentType() + "'" +

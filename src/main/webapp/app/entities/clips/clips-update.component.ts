@@ -3,20 +3,13 @@ import { Component, Inject } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import JhiDataUtils from '@/shared/data/data-utils.service';
 
-import { numeric, required } from 'vuelidate/lib/validators';
-
-import ClipUserService from '@/entities/clip-user/clip-user.service';
-import { IClipUser } from '@/shared/model/clip-user.model';
+import { required } from 'vuelidate/lib/validators';
 
 import { IClips, Clips } from '@/shared/model/clips.model';
 import ClipsService from './clips.service';
 
 const validations: any = {
   clips: {
-    userId: {
-      required,
-      numeric,
-    },
     name: {
       required,
     },
@@ -34,10 +27,6 @@ const validations: any = {
 export default class ClipsUpdate extends mixins(JhiDataUtils) {
   @Inject('clipsService') private clipsService: () => ClipsService;
   public clips: IClips = new Clips();
-
-  @Inject('clipUserService') private clipUserService: () => ClipUserService;
-
-  public clipUsers: IClipUser[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -46,7 +35,6 @@ export default class ClipsUpdate extends mixins(JhiDataUtils) {
       if (to.params.clipsId) {
         vm.retrieveClips(to.params.clipsId);
       }
-      vm.initRelationships();
     });
   }
 
@@ -121,11 +109,5 @@ export default class ClipsUpdate extends mixins(JhiDataUtils) {
     }
   }
 
-  public initRelationships(): void {
-    this.clipUserService()
-      .retrieve()
-      .then(res => {
-        this.clipUsers = res.data;
-      });
-  }
+  public initRelationships(): void {}
 }
