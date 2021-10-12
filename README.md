@@ -46,7 +46,9 @@ Außerdem sollen erstellte Clips automatisch den aktuellen Benutzer hinzugefügt
 // Codeausschnitt
 
 # Tests
-Standardmäßig verwendet jhipster JUnit (Unit tests) und Jest (UI).  
+Standardmäßig verwendet jhipster JUnit (Unit tests) und Jest (UI). Die Tests können durch "./mvnw clean verify" und "npm test" ausgeführt werden.
+Die Tests wurden um einen Test erweitert, der sicherstellt, dass ein Benutzer nur einmal ein clip bewerten kann.
+//Codeausschnitt
 
 # Mehrsprachigkeiten
 
