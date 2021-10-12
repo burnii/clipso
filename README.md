@@ -32,22 +32,29 @@ Von jhipster wird die erste Möglichkeit empfohlen und deswegen wurde diese auch
 ### Bearbeiten von Entitäten
 Nimmt man Veränderungen an beispielsweise der Standard generierten Anzeige der Entität vor und muss nachträglich etwas an den generierten Entitäten ändern, werden bei der wiederholten Generierung alle Änderungen überschrieben. Am besten sollten im vorhinein die Entitäten direkt richtig erstellt werden. 
 
+# Frontend Anpassungen
+Im Frontend wird die Anzeige der Entitäten überarbeitet. Anstatt einer Tabellenform sollen die Bilder nebeneinander in Kachelform mit Namen und up bzw. downvote Möglichkeiten angezeigt werden. Hier ein Vorher und nachher Vergleich der beiden Ansichten:
+![altimage](./image/uiOld.png)
+![altimage](./image/uiNew.png)
+Zusätzlich existiert ein Button, der die Aufnahme eines Screenshots ermöglicht und Automatisch das Bild dem aktuellen Benutzer hinzufügt.
 
-# Frontend bearbeiten
-entities bilder als kacheln anzeigen
-upvotes ermögliche
+# Backend Anpassungen
+Im Backend muss zur Erstellung von Clips eine validierung eingeführt werden, die sicherstellt, dass ein Benutzer ein Bild nicht mehrmals bewerten kann.
+// Codeausschnitt
 
-
-# Backend bearbeitne
-evlt irgendwas ausdenken
+Außerdem sollen erstellte Clips automatisch den aktuellen Benutzer hinzugefügt werden.
+// Codeausschnitt
 
 # Tests
+Standardmäßig verwendet jhipster JUnit (Unit tests) und Jest (UI).  
 
 # Mehrsprachigkeiten
 
 # continious integration
 
 # deployment
+
+# neue routes hinzufügen
 
 # fazit
 
